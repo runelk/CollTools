@@ -4,7 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # from webapp.database import Base
 from sqlalchemy import Column, Integer, String
 # import webapp.models as models
-from rdflib import Graph
+from rdflib import Graph, Namespace
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/test.db'
@@ -68,17 +68,18 @@ def relations():
     return jsonify(test)
 
 
-@app.route('api/v1/rdf/test')
+@app.route('/rdf/test')
 def rdftest():
     g = Graph(store='Sleepycat', identifier="test")
     g.open('db/rdf.bdb')
     g.bind("dgr", 'http://localhost:5000/depgrams/0.1/')
     ns_dgr = Namespace('http://localhost:5000/depgrams/0.1/')
-    res = []
-    for s, o, p in g:
-        res.append(str(s))
+    # res = []
+    # for s, o, p in g:
+    #     res.append(str(s))
+    s = g.serialize(format='pretty-xml')
     g.close()
-    return jsonify(res)
+    return s
 
 if __name__ == '__main__':
     app.run()

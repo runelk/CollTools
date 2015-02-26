@@ -1,4 +1,4 @@
-#!/usr/bin/enc python
+#!/usr/bin/env python
 
 import codecs
 import sys
@@ -89,9 +89,9 @@ def db_insert_relations(doc_filename, depseqs, db_filename=DB_FILENAME):
                  '(document, form1, postag1, rel, form2, postag2, freq) ' + \
                  'VALUES (?, ?, ?, ?, ?, ?, ?)'
     rellist = ((doc_filename,
-                r[0][0], r[0][1],
-                r[1],
-                r[2][0], r[2][1],
+                r[0], r[1],
+                r[2],
+                r[3], r[4],
                 depseqs['relations'][r])
                for r in depseqs['relations'])
 
@@ -134,19 +134,15 @@ def print_words(depseqs, cutoff=1):
 
 def main(filename, input_enc='utf-8'):
 
-
     db_conll_init(filename)
-    f = filename if filename else codecs.getreader(input_enc)(sys.stdin)
-    conll_file = codecs.open(f, 'r', input_enc)
-    depseqs = conll.depsequences(conll_file)
+    depseqs = conll.depsequences(codecs.open(filename, 'r', input_enc))
+
+    db_init()
+    db_insert_words(filename, depseqs)
+    db_insert_relations(filename, depseqs)
+
     rdf_init()
 
-    # print_words(depseqs)
-    # print_relations(depseqs)
-
-    # db_init()
-    # db_insert_words(str(f), depseqs)
-    # db_insert_relations(str(f), depseqs)
 
 if __name__ == "__main__":
     main(sys.argv[1] if len(sys.argv) > 1 else None)
