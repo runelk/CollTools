@@ -1,0 +1,11 @@
+
+class Config(object):
+    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///db/test.db'
+    CONLL_DATABASE_URI = 'sqlite:///db/conll.db'
+
+    RDFLIB_STORE_TYPE = 'Sleepycat'
+    RDFLIB_STORE_IDENTIFIER_TEST = 'test'
+    RDFLIB_DB_PATH = 'db/rdf.bdb'
+
+    RDF_NAMESPACE_DEPGRAMS = 'http://localhost:5000/depgrams/0.1/'
