@@ -1,0 +1,13 @@
+{# _webapp/templates/layout.html_ #}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+    {% block body %}
+        <h1>{% block topheading %}{% endblock %}</h1>
+    {% endblock %}
+    </body>
+</html>

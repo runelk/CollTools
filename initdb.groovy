@@ -79,7 +79,7 @@ def start(graphLocation, conllDocs) {
   }
 }
 
-def GRAPH_LOCATION = "plocal:/Users/rkn083/mystuff/projects/iln/nodalida_2015/colltools/db/orientdb/test02"
+def GRAPH_LOCATION = "plocal:./db/orientdb/test02"
 
 def fileList = []
 new File('./data').eachFileRecurse(FILES) { f ->

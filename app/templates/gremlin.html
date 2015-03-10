@@ -1,0 +1,16 @@
+
+{# _myapp/templates/index.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}CollTools Gremlin{% endblock %}
+{% block topheading %}Gremlin{% endblock %}
+{% block body %}
+    {{ super() }}
+    <div class="gremlinQueryContainer">
+      <h2>Write a Gremlin query here:</h2>
+      <form action="{{ url_for('api_v1_gremlin') }}" method=post class="gqForm">
+	<textarea name="q"></textarea>
+	<input type="submit" value="Run Query">
+      </form>
+    </div>
+{% endblock %}
